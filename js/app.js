@@ -32,15 +32,33 @@ for (var i = 0; i < kitties.length; i++) {
   var kitty = kitties[i];
   var kittyNameHolder = document.createElement('h5');
   var kittyNameHolderContent = document.createTextNode(kitty.name);
+  var image = document.createElement("img");
+  var counter = document.createElement("div");
+  var counterCount = document.createElement("span");
+  var currentCat = kitty.image
+  counterCount.innerHTML = ("Clicky click counter: " + kitty.clickCount);
+  kitty.counterCount = counterCount;
+  var currentCat = kitty.image
+
 
   kittyNameHolder.addEventListener('click', function(kittyCopy) {
     return function() {
-    console.log (kitty.name);
+      image.src = kittyCopy.url;
+      display.appendChild(image);
+      console.log (kittyCopy);
+    };
+  }(kitty));
+
+  currentCat.addEventListener('click',function(kittyCopy) {
+    return function() {
+      kittyCopy.clickCount++;
+      kittyCopy.counterCount.innerHTML = "Clicky click counter: " + kittyCopy.clickCount;
+      display.appendChild(counter);
+      console.log (kittyCopy)
     };
   }(kitty));
 
   kittyNameHolder.appendChild(kittyNameHolderContent);
-  console.log (kittyNameHolder);
   list.appendChild(kittyNameHolder);
 }
 
