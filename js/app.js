@@ -27,40 +27,52 @@ var kitties = [
   }
 ];
 
-var catNames = document.getElementById('list');
 for (var i = 0; i < kitties.length; i++) {
   var kitty = kitties[i];
   var kittyNameHolder = document.createElement('h5');
   var kittyNameHolderContent = document.createTextNode(kitty.name);
   var image = document.createElement("img");
-  var counter = document.createElement("div");
-  var counterCount = document.createElement("span");
-  var currentCat = kitty.image
-  counterCount.innerHTML = ("Clicky click counter: " + kitty.clickCount);
-  kitty.counterCount = counterCount;
-  var currentCat = kitty.image
-
 
   kittyNameHolder.addEventListener('click', function(kittyCopy) {
     return function() {
       image.src = kittyCopy.url;
+      kittyCopy.clickCount = 0;
+      document.getElementById('count').innerHTML = 'Count: ' + kittyCopy.clickCount
+      const display = document.getElementById('display');
       display.appendChild(image);
-      console.log (kittyCopy);
-    };
-  }(kitty));
+      display.addEventListener('click', function(e) {
 
-  currentCat.addEventListener('click',function(kittyCopy) {
-    return function() {
-      kittyCopy.clickCount++;
-      kittyCopy.counterCount.innerHTML = "Clicky click counter: " + kittyCopy.clickCount;
-      display.appendChild(counter);
-      console.log (kittyCopy)
+        console.log('got here!!!', e);
+
+         kittyCopy.clickCount += 1;
+         document.getElementById('count').innerHTML = 'Count: ' + kittyCopy.clickCount
+      })
+      console.log (kittyCopy);
     };
   }(kitty));
 
   kittyNameHolder.appendChild(kittyNameHolderContent);
   list.appendChild(kittyNameHolder);
 }
+
+/*var counter = document.createElement("div");
+var counterCount = document.createElement("span");
+var currentCat = document.createElement("img");
+kitty.image = currentCat;
+counterCount.innerHTML = ("Clicky click counter: " + kitty.clickCount);
+kitty.counterCount = counterCount;
+currentCat.addEventListener('click',function(kittyCopy) {
+  return function() {
+    kittyCopy.clickCount++;
+    kittyCopy.counterCount.innerHTML = "Clicky click counter: " + kittyCopy.clickCount;
+    display.appendChild(counter);
+    display.appendChild(currentCat);
+    console.log (kittyCopy);
+  };
+}(kitty));*/
+
+
+
 
 /*
 var master = document.getElementById('master');
